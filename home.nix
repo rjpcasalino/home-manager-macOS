@@ -79,6 +79,10 @@
 
   # zsh
   programs.zsh.enable = true;
+  programs.zsh.shellAliases = {
+    ll = "ls -l";
+    ".." = "cd ..";
+  };
   programs.zsh.initExtra =
     ''
       export BASH_SILENCE_DEPRECATION_WARNING=1
