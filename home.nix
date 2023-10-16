@@ -7,6 +7,9 @@
   # You should not change this value, even if you update Home Manager.
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
+  # Darwin stuff
+  targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
+
   home.packages = [
     pkgs.nixpkgs-fmt
     pkgs.neofetch
@@ -23,10 +26,6 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
-
-  # Darwin stuff
-  # FIXME: find a better place for this...
-  targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -49,10 +48,14 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  # 
-  programs.git.enable = true;
 
-  # TODO: enable bash and have HM manage it...
+  # TODO: git settings #
+  programs.git.enable = true;
+  # #
+
+  # SHELLS #
+  # TODO: remove?
+  # macOS barks at some of these settings
   programs.bash.enable = false;
   programs.bash.historyIgnore = [ "ls" "cd" "exit" ];
   programs.bash.shellAliases =
@@ -73,6 +76,8 @@
       source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
       export PS1='\n\[\e[38;5;200m\]\u\[\e[0m\] on \[\e[38;5;27m\]\H\[\e[0m\] in [\w]$(__git_ps1 " \[\e[38;5;207m\]on\[\e[0m\] (%s)") '
     '';
+    # #
+
   # zsh
   programs.zsh.enable = true;
   programs.zsh.initExtra =
@@ -84,8 +89,8 @@
       export PS1='%~ $(__git_ps1 "(%s) ")%# '
     '';
 
-  # vim and vscode
-  # on macOS  programs.vim.packageConfigurable = pkgs.vim-darwin
+  # vim & vscode #
+  # NOTE: macOS programs.vim.packageConfigurable = pkgs.vim-darwin
   programs.vim.enable = true;
   programs.vim.packageConfigurable = pkgs.vim-darwin;
   programs.vim.settings = {
