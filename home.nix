@@ -53,9 +53,8 @@
   programs.git.enable = true;
   # #
 
-  # SHELLS #
-  # TODO: remove?
-  # macOS barks at some of these settings
+  # Shells #
+  # TODO: remove bash? macOS barks at some of these settings
   programs.bash.enable = false;
   programs.bash.historyIgnore = [ "ls" "cd" "exit" ];
   programs.bash.shellAliases =
@@ -76,7 +75,7 @@
       source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
       export PS1='\n\[\e[38;5;200m\]\u\[\e[0m\] on \[\e[38;5;27m\]\H\[\e[0m\] in [\w]$(__git_ps1 " \[\e[38;5;207m\]on\[\e[0m\] (%s)") '
     '';
-    # #
+  # #
 
   # zsh
   programs.zsh.enable = true;
@@ -98,6 +97,7 @@
     mouse = "a";
     number = true;
   };
+  # TODO: add docker and makefile vscode stuff
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
