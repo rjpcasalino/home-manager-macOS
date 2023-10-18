@@ -102,16 +102,17 @@
     mouse = "a";
     number = true;
   };
-  # TODO: add docker and makefile vscode stuff
+
   programs.vscode = {
     enable = true;
+    mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       dracula-theme.theme-dracula
       yzhang.markdown-all-in-one
+      ms-azuretools.vscode-docker
+      ms-vscode.makefile-tools
     ];
-    enableExtensionUpdateCheck = true;
-    enableUpdateCheck = true;
   };
   # #
 }
