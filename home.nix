@@ -86,10 +86,11 @@
   programs.zsh.initExtra =
     ''
       export BASH_SILENCE_DEPRECATION_WARNING=1
+      GIT_PS1_SHOWDIRTYSTATE=1
       source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
       setopt PROMPT_SUBST
       autoload -U colors && colors
-      export PS1='%~ $(__git_ps1 "(%s) ")%# '
+      export PS1='%F{magenta}%n%f %B%F{blue}%~ $(__git_ps1 "(%s) ")%b%f%# '
     '';
 
   # vim & vscode #
