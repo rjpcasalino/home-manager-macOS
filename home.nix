@@ -33,7 +33,7 @@
       c = "commit";
       d = "diff";
       s = "status";
-      log = "log --graph --decorate --pretty=oneline --abbrev-commit";
+      lg = "log --graph --decorate --pretty=oneline --abbrev-commit";
     };
   };
   # #
