@@ -32,36 +32,15 @@
       a = "add";
       c = "commit";
       d = "diff";
+      f = "fetch";
       s = "status";
-      lg = "log --graph --decorate --pretty=oneline --abbrev-commit";
+      l = "log --graph --decorate --pretty=oneline --abbrev-commit";
+      p = "push"
     };
   };
   # #
 
   # Shells #
-  # TODO: remove bash? 
-  # macOS barks at some of these settings
-  programs.bash.enable = false;
-  programs.bash.historyIgnore = [ "ls" "cd" "exit" ];
-  programs.bash.shellAliases =
-    {
-      ".." = "cd ..";
-      "..." = "cd ../..";
-    };
-  programs.bash.enableCompletion = true;
-  programs.bash.shellOptions = [
-    "histappend"
-    "checkwinsize"
-    "extglob"
-    "-globstar"
-    "-checkjobs"
-  ];
-  programs.bash.initExtra =
-    ''
-      source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
-      export PS1='\n\[\e[38;5;200m\]\u\[\e[0m\] on \[\e[38;5;27m\]\H\[\e[0m\] in [\w]$(__git_ps1 " \[\e[38;5;207m\]on\[\e[0m\] (%s)") '
-    '';
-  # #
 
   # zsh #
   programs.zsh.enable = true;
@@ -69,6 +48,7 @@
     ll = "ls -l";
     ".." = "cd ..";
     "..." = "cd ../..";
+    "g" = "git";
   };
   programs.zsh.initExtra =
     ''
@@ -86,12 +66,18 @@
 
   # vim & vscode #
   # NOTE: macOS programs.vim.packageConfigurable = pkgs.vim-darwin
-  programs.vim.enable = true;
-  programs.vim.packageConfigurable = pkgs.vim-darwin;
-  programs.vim.settings = {
-    background = "light";
-    mouse = "a";
-    number = true;
+  programs.vim = {
+    enable = true;
+    packageConfigurable = pkgs.vim-darwin;
+    settings = {
+      background = "light";
+      mouse = "a";
+      number = true;
+    };
+    # TODO: autocmd for spell
+    extraConfig = ''
+      set spell
+    '';
   };
 
   programs.vscode = {
