@@ -35,7 +35,7 @@
       f = "fetch";
       s = "status";
       l = "log --graph --decorate --pretty=oneline --abbrev-commit";
-      p = "push"
+      p = "push";
     };
   };
   # #
