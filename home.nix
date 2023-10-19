@@ -29,11 +29,11 @@
     userName = "rjpc";
     userEmail = "rjpc@rjpc.net";
     aliases = {
-      ga = "git add";
-      gc = "git commit";
-      gd = "git diff";
-      gs = "git status";
-      glog = "git log --graph --decorate --pretty=oneline --abbrev-commit";
+      a = "add";
+      c = "commit";
+      d = "diff";
+      s = "status";
+      log = "log --graph --decorate --pretty=oneline --abbrev-commit";
     };
   };
   # #
