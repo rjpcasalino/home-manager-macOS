@@ -17,34 +17,30 @@
     pkgs.ripgrep
   ];
 
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
-
+  home.file = { };
   home.sessionVariables = { };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # TODO: git settings #
+  # git #
   programs.git = {
     enable = true;
     userName = "rjpc";
     userEmail = "rjpc@rjpc.net";
+    aliases = {
+      ga = "git add";
+      gc = "git commit";
+      gd = "git diff";
+      gs = "git status";
+      glog = "git log --graph --decorate --pretty=oneline --abbrev-commit";
+    };
   };
   # #
 
   # Shells #
-  # TODO: remove bash? macOS barks at some of these settings
+  # TODO: remove bash? 
+  # macOS barks at some of these settings
   programs.bash.enable = false;
   programs.bash.historyIgnore = [ "ls" "cd" "exit" ];
   programs.bash.shellAliases =
@@ -67,7 +63,7 @@
     '';
   # #
 
-  # zsh
+  # zsh #
   programs.zsh.enable = true;
   programs.zsh.shellAliases = {
     ll = "ls -l";
@@ -80,11 +76,13 @@
       export GIT_PS1_SHOWDIRTYSTATE=1
       export GIT_PS1_SHOWSTASHSTATE=1
       export GIT_PS1_SHOWCOLORHINTS=1
+      export GIT_PS1_SHOWUPSTREAM="auto"
       setopt PROMPT_SUBST
       autoload -U colors && colors
       source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
       export PS1='%F{magenta}%n%f %B%F{blue}%~ $(__git_ps1 "(%s) ")%b%f%# '
     '';
+  # #
 
   # vim & vscode #
   # NOTE: macOS programs.vim.packageConfigurable = pkgs.vim-darwin
