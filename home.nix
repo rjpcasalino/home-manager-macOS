@@ -11,24 +11,12 @@
   targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
 
   home.packages = [
+    pkgs.cowsay
     pkgs.nixpkgs-fmt
     pkgs.neofetch
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    pkgs.ripgrep
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -42,15 +30,17 @@
     # '';
   };
 
-  home.sessionVariables = {
-    # EDITOR = "vim";
-  };
+  home.sessionVariables = { };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   # TODO: git settings #
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "rjpc";
+    userEmail = "rjpc@rjpc.net";
+  };
   # #
 
   # Shells #
@@ -82,14 +72,17 @@
   programs.zsh.shellAliases = {
     ll = "ls -l";
     ".." = "cd ..";
+    "..." = "cd ../..";
   };
   programs.zsh.initExtra =
     ''
       export BASH_SILENCE_DEPRECATION_WARNING=1
-      GIT_PS1_SHOWDIRTYSTATE=1
-      source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
+      export GIT_PS1_SHOWDIRTYSTATE=1
+      export GIT_PS1_SHOWSTASHSTATE=1
+      export GIT_PS1_SHOWCOLORHINTS=1
       setopt PROMPT_SUBST
       autoload -U colors && colors
+      source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
       export PS1='%F{magenta}%n%f %B%F{blue}%~ $(__git_ps1 "(%s) ")%b%f%# '
     '';
 
