@@ -11,10 +11,10 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      system = "aarch64-darwin";
+      system = "x86_64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."rjpc" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."ryancasalino" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
