@@ -10,17 +10,20 @@
   # Darwin stuff
   targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
 
-  home.packages = with pkgs; [
-    lolcat
-    nixpkgs-fmt
-    neofetch
-  ];
+  # see: https://nix.dev/recipes/best-practices
+  # avoid "with"
+  home.packages = builtins.attrValues {
+    inherit (pkgs)
+      lolcat
+      nixpkgs-fmt
+      neofetch;
+  };
 
-  home.file = { };
-  home.sessionVariables = { };
+  home. file = { };
+  home. sessionVariables = { };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs. home-manager. enable = true;
 
   programs.git = {
     enable = true;
@@ -85,17 +88,18 @@
   programs.vim = {
     enable = true;
     packageConfigurable = pkgs.vim-darwin;
-    plugins = with pkgs.vimPlugins; [
-      colorizer
-      csv-vim
-      csv
-      lightline-vim
-      matchit-zip
-      vim-go
-      vim-nix
-      vim-terraform
-      vim-lsp
-    ];
+    plugins = builtins.attrValues {
+      inherit (pkgs.vimPlugins)
+        colorizer
+        csv-vim
+        csv
+        lightline-vim
+        matchit-zip
+        vim-go
+        vim-nix
+        vim-terraform
+        vim-lsp;
+    };
     settings = {
       background = "light";
       mouse = "a";
